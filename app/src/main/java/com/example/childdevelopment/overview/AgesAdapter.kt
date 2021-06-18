@@ -6,33 +6,42 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.R
+import com.example.childdevelopment.databinding.LinearViewItemBinding
 
-class AgesAdapter : RecyclerView.Adapter<AgesAdapter.AgesViewHolder>(){
-    class AgesViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val button = view.findViewById<TextView>(R.id.button_item)
+class AgesAdapter :
+    ListAdapter<String, AgesAdapter.AgesViewHolder>(DiffCallback){
+    class AgesViewHolder(private var binding: LinearViewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+            fun bind(ageText: String) {
+                binding.item = ageText
+                binding.executePendingBindings()
+            }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgesViewHolder {
-        val layout = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.linear_view_item, parent, false)
+    /**
+     * Allows the RecyclerView to determine which items have changed when the [List] of
+     * [String] has been updated.
+     */
+    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
+        }
 
-        return AgesViewHolder(layout)
-    }
-
-    override fun onBindViewHolder(holder: AgesViewHolder, position: Int) {
-        val item = allAgesList.get(position)
-        holder.button.text = item
-
-        holder.button.setOnClickListener {
-            val action = AgesListFragmentDirections.actionAgesListFragmentToMilestonesListFragment(age = holder.button.text.toString())
-            holder.view.findNavController().navigate(action)
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
         }
     }
 
-    override fun getItemCount(): Int {
-        return allAgesList.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgesViewHolder {
+        return AgesViewHolder(LinearViewItemBinding.inflate(LayoutInflater.from(parent.context)))
+    }
+
+    override fun onBindViewHolder(holder: AgesViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
     }
 }

@@ -9,13 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.databinding.FragmentAgesListBinding
-import com.example.childdevelopment.overview.AgesAdapter
 
 class AgesListFragment : Fragment() {
-    private var _binding: FragmentAgesListBinding? = null
-    private val binding get() = _binding!!
     private val viewModel: AgesViewModel by viewModels()
-    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +22,17 @@ class AgesListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentAgesListBinding.inflate(inflater, container, false)
+    ): View {
+        val binding = FragmentAgesListBinding.inflate(inflater)
+        //val binding = GridViewItemBinding.inflate(inflater)
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        binding.lifecycleOwner = this
+
+        // Giving the binding access to the OverviewViewModel
+        binding.viewModel = viewModel
+
+        binding.recyclerView.adapter = AgesAdapter()
+
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
-        recyclerView.adapter = AgesAdapter()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

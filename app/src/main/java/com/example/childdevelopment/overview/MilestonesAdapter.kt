@@ -25,6 +25,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.overview.allMilestonesList
@@ -45,7 +46,7 @@ class MilestonesAdapter(private val age: String, context: Context) :
     }
 
     class MilestoneViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val button = view.findViewById<Button>(R.id.button_item)
+        val button = view.findViewById<TextView>(R.id.text_item)
     }
 
     override fun getItemCount(): Int = filteredMilestones.size
