@@ -1,5 +1,7 @@
 package com.example.childdevelopment.overview
 
+import java.util.*
+
 val allAgesList: List<String> =
     listOf("0 to 1 month",
             "1 to 2 months",
@@ -11,4 +13,8 @@ val allAgesList: List<String> =
             "18 to 24 months",
             "2 to 3 years",
             "3 to 4 years",
-            "4 to 5 years",)
+            "4 to 5 years")
+
+val allMilestonesList =
+        hashMapOf<String, List<String>>(allAgesList[0] to listOf<String>("Milestone 1", "Milestone 2"),
+                allAgesList[1] to listOf<String>("Milestone 2"))

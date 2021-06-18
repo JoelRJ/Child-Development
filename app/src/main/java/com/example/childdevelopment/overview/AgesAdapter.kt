@@ -1,18 +1,17 @@
 package com.example.childdevelopment.overview
 
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.R
-import com.example.childdevelopment.overview.allAgesList
 
 class AgesAdapter : RecyclerView.Adapter<AgesAdapter.AgesViewHolder>(){
     class AgesViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val textView = view.findViewById<TextView>(R.id.text_item)
+        val button = view.findViewById<TextView>(R.id.button_item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgesViewHolder {
@@ -25,10 +24,11 @@ class AgesAdapter : RecyclerView.Adapter<AgesAdapter.AgesViewHolder>(){
 
     override fun onBindViewHolder(holder: AgesViewHolder, position: Int) {
         val item = allAgesList.get(position)
-        holder.textView.text = item.toString()
+        holder.button.text = item
 
-        holder.textView.setOnClickListener {
-            Log.d("AgesAdapter", "Made it to click!")
+        holder.button.setOnClickListener {
+            val action = AgesListFragmentDirections.actionAgesListFragmentToMilestonesListFragment(age = holder.button.text.toString())
+            holder.view.findNavController().navigate(action)
         }
     }
 
