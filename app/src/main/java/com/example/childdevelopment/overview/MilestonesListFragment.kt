@@ -5,50 +5,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.childdevelopment.MilestonesAdapter
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.childdevelopment.databinding.FragmentMilestonesListBinding
 
 class MilestonesListFragment : Fragment() {
-    companion object {
-        const val AGE = "age"
-    }
+    private val viewModel: OverviewViewModel by activityViewModels()
 
-    private var _binding: FragmentMilestonesListBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var age: String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMilestonesListBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-    }
+    ): View? {
+        val binding = FragmentMilestonesListBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = MilestonesAdapter(age, requireContext())
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        binding.lifecycleOwner = this
 
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        )
-    }
+        // Giving the binding access to the OverviewViewModel
+        binding.viewModel = viewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        binding.recyclerView.adapter = MilestonesAdapter()
 
-        arguments?.let {
-            age = it.getString(AGE).toString()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return binding.root
     }
 }

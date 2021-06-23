@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="item"
-            type="String" />
+            type="com.example.childdevelopment.network.AgesOption" />
+        <variable
+            name="viewModel"
+            type="com.example.childdevelopment.overview.OverviewViewModel" />
     </data>
 
     <TextView
         android:id="@+id/text_item"
-        android:text="@{item}"
+        android:text="@{item.option}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:padding="8dp" />
+        <!--android:onClick="@{() -> viewModel.chooseAge(item)"-->
+
 
 </layout>

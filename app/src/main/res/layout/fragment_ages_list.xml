@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.childdevelopment.overview.AgesViewModel" />
+            type="com.example.childdevelopment.overview.OverviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +17,6 @@
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="6dp"
-            android:clipToPadding="false"
             app:listData="@{viewModel.ages}"
             app:layoutManager=
                 "androidx.recyclerview.widget.LinearLayoutManager"

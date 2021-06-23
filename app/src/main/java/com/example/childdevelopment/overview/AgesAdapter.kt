@@ -11,27 +11,28 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.R
 import com.example.childdevelopment.databinding.LinearViewItemBinding
+import com.example.childdevelopment.network.AgesOption
 
 class AgesAdapter :
-    ListAdapter<String, AgesAdapter.AgesViewHolder>(DiffCallback){
+    ListAdapter<AgesOption, AgesAdapter.AgesViewHolder>(DiffCallback){
     class AgesViewHolder(private var binding: LinearViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(ageText: String) {
-                binding.item = ageText
-                binding.executePendingBindings()
-            }
+        fun bind(ageText: AgesOption) {
+            binding.item = ageText
+            binding.executePendingBindings()
+        }
     }
 
     /**
      * Allows the RecyclerView to determine which items have changed when the [List] of
-     * [String] has been updated.
+     * [AgesOption] has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<AgesOption>() {
+        override fun areItemsTheSame(oldItem: AgesOption, newItem: AgesOption): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: AgesOption, newItem: AgesOption): Boolean {
             return oldItem == newItem
         }
     }
