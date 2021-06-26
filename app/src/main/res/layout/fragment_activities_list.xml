@@ -12,14 +12,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:context="com.example.childdevelopment.overview.MilestonesListFragment">
+        tools:context="com.example.childdevelopment.overview.ActivitiesListFragment">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="6dp"
-            android:clipToPadding="false"
-            app:milestoneData="@{viewModel.currentMilestones}"
+            app:activitiesData="@{viewModel.milestoneActivities}"
             app:layoutManager=
                 "androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

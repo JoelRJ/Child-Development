@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.example.childdevelopment.network.AgesOption" />
+        <variable
+            name="ageFragment"
+            type="com.example.childdevelopment.overview.AgesListFragment" />
+    </data>
+
+    <TextView
+        android:id="@+id/text_item"
+        android:text="@{item.ageRange}"
+        android:onClick="@{() -> ageFragment.goToNextScreen(item.ageRange)}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="8dp" />
+</layout>

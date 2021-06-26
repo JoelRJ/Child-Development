@@ -10,37 +10,43 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.R
-import com.example.childdevelopment.databinding.LinearViewItemBinding
+import com.example.childdevelopment.databinding.MilestonesViewItemBinding
+import com.example.childdevelopment.network.MilestonesOption
 
 class MilestonesAdapter :
-    ListAdapter<String, MilestonesAdapter.MilestonesViewHolder>(DiffCallback){
-    class MilestonesViewHolder(private var binding: LinearViewItemBinding) :
+    ListAdapter<MilestonesOption, MilestonesAdapter.MilestonesViewHolder>(DiffCallback){
+    class MilestonesViewHolder(private var binding: MilestonesViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(milestoneText: String) {
-            //binding.item = milestoneText
+        fun bind(milestone: MilestonesOption) {
+            Log.d("MilestoneAdapter", "Here1")
+            binding.item = milestone
             binding.executePendingBindings()
         }
     }
 
     /**
      * Allows the RecyclerView to determine which items have changed when the [List] of
-     * [String] has been updated.
+     * [MilestonesOption] has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+    companion object DiffCallback : DiffUtil.ItemCallback<MilestonesOption>() {
+        override fun areItemsTheSame(oldItem: MilestonesOption, newItem: MilestonesOption): Boolean {
+            Log.d("MilestonesAdapter", "Here4")
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItem: MilestonesOption, newItem: MilestonesOption): Boolean {
+            Log.d("MilestonesAdapter", "Here5")
+            return oldItem.milestone == newItem.milestone
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MilestonesViewHolder {
-        return MilestonesViewHolder(LinearViewItemBinding.inflate(LayoutInflater.from(parent.context)))
+        Log.d("MilestoneAdapter", "Here2")
+        return MilestonesViewHolder(MilestonesViewItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MilestonesViewHolder, position: Int) {
+        Log.d("MilestoneAdapter", "Here3")
         val item = getItem(position)
         holder.bind(item)
     }

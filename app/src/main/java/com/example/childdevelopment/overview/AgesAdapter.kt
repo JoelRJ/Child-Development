@@ -10,15 +10,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.R
-import com.example.childdevelopment.databinding.LinearViewItemBinding
+import com.example.childdevelopment.databinding.AgesViewItemBinding
 import com.example.childdevelopment.network.AgesOption
 
-class AgesAdapter :
+class AgesAdapter(val fragment: AgesListFragment) :
     ListAdapter<AgesOption, AgesAdapter.AgesViewHolder>(DiffCallback){
-    class AgesViewHolder(private var binding: LinearViewItemBinding) :
+    class AgesViewHolder(private var binding: AgesViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(ageText: AgesOption) {
-            binding.item = ageText
+        fun bind(age: AgesOption, fragment: AgesListFragment) {
+            Log.d("AgesAdapter", "Here2")
+            binding.item = age
+            binding.ageFragment = fragment
             binding.executePendingBindings()
         }
     }
@@ -29,20 +31,21 @@ class AgesAdapter :
      */
     companion object DiffCallback : DiffUtil.ItemCallback<AgesOption>() {
         override fun areItemsTheSame(oldItem: AgesOption, newItem: AgesOption): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: AgesOption, newItem: AgesOption): Boolean {
-            return oldItem == newItem
+            return oldItem.ageRange == newItem.ageRange
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AgesViewHolder {
-        return AgesViewHolder(LinearViewItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return AgesViewHolder(AgesViewItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: AgesViewHolder, position: Int) {
+        Log.d("AgesAdapter", "Here1")
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, fragment)
     }
 }

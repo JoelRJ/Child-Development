@@ -8,15 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.childdevelopment.R
-import com.example.childdevelopment.databinding.FragmentAgesListBinding
+import com.example.childdevelopment.databinding.FragmentMilestonesListBinding
 
-class AgesListFragment : Fragment() {
+
+class ActivitiesListFragment : Fragment() {
     private val viewModel: OverviewViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,29 +25,22 @@ class AgesListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentAgesListBinding = FragmentAgesListBinding.inflate(inflater)
+        val binding: FragmentMilestonesListBinding = FragmentMilestonesListBinding.inflate(inflater)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
-        // Giving the binding access to the OverviewViewModel and this fragment
+        // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        binding.recyclerView.adapter = AgesAdapter(this@AgesListFragment)
+        binding.recyclerView.adapter = ActivitiesAdapter()
 
-        // Add divider between ages
+        // Add divider between milestones
         val decoration  = DividerItemDecoration(binding.recyclerView.context, LinearLayout.VERTICAL)
         binding.recyclerView.addItemDecoration(decoration)
 
         binding.executePendingBindings()
-
+        Log.d("ActivitieslistFragment", "Got here!")
         return binding.root
-    }
-
-    fun goToNextScreen(selectedAge: String) {
-        Log.d("AgesListFragment", selectedAge)
-        viewModel.chooseAge(selectedAge)
-        Log.d("AgeslistFragment", viewModel.currentMilestones.value.toString())
-        findNavController().navigate(R.id.action_agesListFragment_to_milestonesListFragment)
     }
 }

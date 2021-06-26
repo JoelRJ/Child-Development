@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.childdevelopment.network.AgesOption
+import com.example.childdevelopment.network.MilestonesOption
 import com.example.childdevelopment.overview.allAgesList
 import kotlinx.coroutines.launch
 
@@ -23,13 +24,16 @@ class OverviewViewModel : ViewModel() {
     private val _ages = MutableLiveData<List<AgesOption>>()
     val ages: LiveData<List<AgesOption>> = _ages
 
-    private val _milestones = MutableLiveData<HashMap<String, List<String>>>()
-
-    private val _currentMilestones = MutableLiveData<List<String>>()
-    val currentMilestones: LiveData<List<String>> = _currentMilestones
-
     private var _currentAge = String()
     val currentAge: String = _currentAge
+
+    private val _milestones = MutableLiveData<List<MilestonesOption>>()
+
+    private val _currentMilestones = MutableLiveData<MutableList<MilestonesOption>>()
+    val currentMilestones: LiveData<MutableList<MilestonesOption>> = _currentMilestones
+
+    private val _milestoneActivities = MutableLiveData<List<String>>()
+    val milestoneActivities: LiveData<List<String>> = _milestoneActivities
 
     init {
         getAges()
@@ -39,26 +43,7 @@ class OverviewViewModel : ViewModel() {
     }
 
     private fun getAges() {
-        val allAgesList: List<String> =
-            listOf("0 to 1 month",
-                "1 to 2 months",
-                "2 to 4 months",
-                "4 to 6 months",
-                "6 to 9 months",
-                "9 to 12 months",
-                "12 to 18 months",
-                "18 to 24 months",
-                "2 to 3 years",
-                "3 to 4 years",
-                "4 to 5 years")
-
-        var marsPhotosList: MutableList<AgesOption> = mutableListOf()
-
-        allAgesList.forEachIndexed { index, s ->
-            marsPhotosList.add(AgesOption(index.toString(), s))
-        }
-
-        _ages.value = marsPhotosList
+        _ages.value = allAgesList
     }
 
     private fun getMilestones() {
@@ -67,7 +52,23 @@ class OverviewViewModel : ViewModel() {
 
     fun chooseAge(ageText: String) {
         _currentAge = ageText
-        _currentMilestones.value = _milestones.value!![ageText]
-        Log.d("OverviewViewModel", _currentAge)
+
+        val newList = mutableListOf<MilestonesOption>()
+
+        Log.d("OverviewViewModel", allMilestonesList.toString())
+        for (element in allMilestonesList) {
+            Log.d("OverviewViewModel:b4", element.toString())
+            if (element.ageRange == _currentAge) {
+
+                Log.d("OverviewViewModel:Insid", element.toString())
+                newList.add(element)
+            }
+        }
+        _currentMilestones.value = newList
+        Log.d("OverviewViewModel:after", _currentMilestones.value.toString())
+    }
+
+    fun chooseMilestone(milestone: MilestonesOption) {
+        _milestoneActivities.value = milestone.activities
     }
 }

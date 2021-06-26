@@ -13,11 +13,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:context="com.example.childdevelopment.overview.AgesListFragment">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:listData="@{viewModel.ages}"
+            app:agesData="@{viewModel.milestoneActivities}"
             app:layoutManager=
                 "androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

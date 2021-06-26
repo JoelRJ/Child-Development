@@ -4,20 +4,14 @@
     <data>
         <variable
             name="item"
-            type="com.example.childdevelopment.network.AgesOption" />
-        <variable
-            name="viewModel"
-            type="com.example.childdevelopment.overview.OverviewViewModel" />
+            type="String" />
     </data>
 
     <TextView
         android:id="@+id/text_item"
-        android:text="@{item.option}"
+        android:text="@{item}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:padding="8dp" />
-        <!--android:onClick="@{() -> viewModel.chooseAge(item)"-->
-
-
 </layout>
