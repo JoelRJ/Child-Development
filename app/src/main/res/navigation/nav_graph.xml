@@ -21,9 +21,12 @@
         <action
             android:id="@+id/action_milestonesListFragment_to_activitiesListFragment"
             app:destination="@id/activitiesListFragment" />
+        <argument
+            android:name="age"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/activitiesListFragment"
         android:name="com.example.childdevelopment.overview.ActivitiesListFragment"
-        android:label="ActivitiesListFragment" />
+        android:label="@string/activities_list_fragment_label" />
 </navigation>

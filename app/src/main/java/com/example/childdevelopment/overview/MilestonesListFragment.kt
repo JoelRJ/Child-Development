@@ -9,13 +9,20 @@ import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.childdevelopment.R
+import com.example.childdevelopment.database.Milestone
+import com.example.childdevelopment.database.MilestoneApplication
 import com.example.childdevelopment.databinding.FragmentMilestonesListBinding
 import com.example.childdevelopment.network.MilestonesOption
 
 class MilestonesListFragment : Fragment() {
-    private val viewModel: OverviewViewModel by activityViewModels()
+    private val viewModel: OverviewViewModel by activityViewModels() {
+        OverviewViewModelFactory(
+            (activity?.application as MilestoneApplication).database.milestoneDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +42,7 @@ class MilestonesListFragment : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        binding.recyclerView.adapter = MilestonesAdapter()
+        binding.recyclerView.adapter = MilestonesAdapter(this@MilestonesListFragment)
 
         // Add divider between milestones
         val decoration  = DividerItemDecoration(binding.recyclerView.context, VERTICAL)
@@ -47,7 +54,11 @@ class MilestonesListFragment : Fragment() {
         return binding.root
     }
 
-    fun showActivities(milestone: MilestonesOption) {
+    fun showActivities(milestone: Milestone) {
+        Log.d("MilestonesListFragment", "Here0")
         viewModel.chooseMilestone(milestone)
+        Log.d("MilestonesListFragment", "Here1")
+        Log.d("MilestonesListFragment", viewModel.milestoneActivities.value.toString())
+        findNavController().navigate(R.id.action_milestonesListFragment_to_activitiesListFragment)
     }
 }

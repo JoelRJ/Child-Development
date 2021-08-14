@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,9 +50,10 @@ class AgesListFragment : Fragment() {
     }
 
     fun goToNextScreen(selectedAge: String) {
-        Log.d("AgesListFragment", selectedAge)
         viewModel.chooseAge(selectedAge)
-        Log.d("AgeslistFragment", viewModel.currentMilestones.value.toString())
-        findNavController().navigate(R.id.action_agesListFragment_to_milestonesListFragment)
+
+        val action = AgesListFragmentDirections.
+            actionAgesListFragmentToMilestonesListFragment(age = selectedAge)
+        findNavController().navigate(action)
     }
 }

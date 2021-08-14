@@ -1,5 +1,6 @@
 package com.example.childdevelopment.overview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -15,6 +16,7 @@ class ActivitiesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(activity: String) {
             binding.item = activity
+            Log.d("ActivitiesAdapter", activity)
             binding.executePendingBindings()
         }
     }

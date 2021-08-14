@@ -10,12 +10,20 @@
             type="com.example.childdevelopment.overview.AgesListFragment" />
     </data>
 
-    <TextView
-        android:id="@+id/text_item"
-        android:text="@{item.ageRange}"
-        android:onClick="@{() -> ageFragment.goToNextScreen(item.ageRange)}"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:padding="8dp" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_item"
+            android:text="@{item.ageRange}"
+            android:onClick="@{() -> ageFragment.goToNextScreen(item.ageRange)}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_margin="4dp"
+            android:padding="2dp"
+            android:textSize="20sp"/>
+
+    </RelativeLayout>
 </layout>

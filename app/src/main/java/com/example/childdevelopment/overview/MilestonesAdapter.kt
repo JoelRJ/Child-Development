@@ -10,31 +10,33 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.R
+import com.example.childdevelopment.database.Milestone
 import com.example.childdevelopment.databinding.MilestonesViewItemBinding
 import com.example.childdevelopment.network.MilestonesOption
 
-class MilestonesAdapter :
-    ListAdapter<MilestonesOption, MilestonesAdapter.MilestonesViewHolder>(DiffCallback){
+class MilestonesAdapter(val fragment: MilestonesListFragment) :
+    ListAdapter<Milestone, MilestonesAdapter.MilestonesViewHolder>(DiffCallback){
     class MilestonesViewHolder(private var binding: MilestonesViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(milestone: MilestonesOption) {
+        fun bind(milestone: Milestone, fragment: MilestonesListFragment) {
             Log.d("MilestoneAdapter", "Here1")
             binding.item = milestone
+            binding.milestoneFragment = fragment
             binding.executePendingBindings()
         }
     }
 
     /**
      * Allows the RecyclerView to determine which items have changed when the [List] of
-     * [MilestonesOption] has been updated.
+     * [Milestone] has been updated.
      */
-    companion object DiffCallback : DiffUtil.ItemCallback<MilestonesOption>() {
-        override fun areItemsTheSame(oldItem: MilestonesOption, newItem: MilestonesOption): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Milestone>() {
+        override fun areItemsTheSame(oldItem: Milestone, newItem: Milestone): Boolean {
             Log.d("MilestonesAdapter", "Here4")
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: MilestonesOption, newItem: MilestonesOption): Boolean {
+        override fun areContentsTheSame(oldItem: Milestone, newItem: Milestone): Boolean {
             Log.d("MilestonesAdapter", "Here5")
             return oldItem.milestone == newItem.milestone
         }
@@ -48,6 +50,6 @@ class MilestonesAdapter :
     override fun onBindViewHolder(holder: MilestonesViewHolder, position: Int) {
         Log.d("MilestoneAdapter", "Here3")
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, fragment)
     }
 }

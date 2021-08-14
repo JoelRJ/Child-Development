@@ -18,7 +18,6 @@ class AgesAdapter(val fragment: AgesListFragment) :
     class AgesViewHolder(private var binding: AgesViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(age: AgesOption, fragment: AgesListFragment) {
-            Log.d("AgesAdapter", "Here2")
             binding.item = age
             binding.ageFragment = fragment
             binding.executePendingBindings()

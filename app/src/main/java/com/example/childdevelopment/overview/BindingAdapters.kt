@@ -14,22 +14,23 @@ val <T : Any > T.classNameKotlin: String?
 
 @BindingAdapter("milestoneData")
 fun bindMilestoneRecyclerView(recyclerView: RecyclerView,
-                        listData: List<MilestonesOption>) {
+                              listData: List<MilestonesOption>) {
     val adapter = recyclerView.adapter as? MilestonesAdapter
     adapter?.submitList(listData)
 }
 
 @BindingAdapter("agesData")
 fun bindRecyclerView(recyclerView: RecyclerView,
-                         listData: List<AgesOption>?) {
+                     listData: List<AgesOption>?) {
     val adapter = recyclerView.adapter as? AgesAdapter
     adapter?.submitList(listData)
 }
 
 @BindingAdapter("activitiesData")
 fun bindActivitiesRecyclerView(recyclerView: RecyclerView,
-                         listData: List<String>?) {
+                               listData: List<String>?) {
     val adapter = recyclerView.adapter as? ActivitiesAdapter
+    Log.d("BindingAdapters", listData?.classNameKotlin.toString())
     adapter?.submitList(listData)
 }
 

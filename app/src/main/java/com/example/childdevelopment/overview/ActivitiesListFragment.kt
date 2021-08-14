@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.childdevelopment.databinding.FragmentMilestonesListBinding
+import com.example.childdevelopment.databinding.FragmentActivitiesListBinding
 
 
 class ActivitiesListFragment : Fragment() {
@@ -25,7 +25,7 @@ class ActivitiesListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentMilestonesListBinding = FragmentMilestonesListBinding.inflate(inflater)
+        val binding: FragmentActivitiesListBinding = FragmentActivitiesListBinding.inflate(inflater)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
