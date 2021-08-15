@@ -23,8 +23,7 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:layout_margin="4dp"
-            android:padding="2dp"
-            android:text="@{item.milestone}" />
+            android:padding="2dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,19 +35,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="See activities"
-                android:onClick="@{() -> milestoneFragment.showActivities(item)}"/>
+                android:text="See activities"/>
 
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/milestone_category"
                 style="@style/Widget.Milestone.TextView.MilestoneView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:gravity="end"
                 android:padding="2dp"
-                android:text="@{item.category}"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>

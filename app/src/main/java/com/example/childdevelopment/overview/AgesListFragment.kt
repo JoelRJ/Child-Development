@@ -15,10 +15,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.childdevelopment.R
+import com.example.childdevelopment.database.MilestoneApplication
 import com.example.childdevelopment.databinding.FragmentAgesListBinding
 
 class AgesListFragment : Fragment() {
-    private val viewModel: OverviewViewModel by activityViewModels()
+    private val viewModel: OverviewViewModel by activityViewModels() {
+        OverviewViewModelFactory(
+            (activity?.application as MilestoneApplication).database.milestoneDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

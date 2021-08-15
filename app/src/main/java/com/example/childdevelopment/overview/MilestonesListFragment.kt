@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.childdevelopment.R
 import com.example.childdevelopment.database.Milestone
 import com.example.childdevelopment.database.MilestoneApplication
@@ -36,13 +37,14 @@ class MilestonesListFragment : Fragment() {
     ): View {
         val binding: FragmentMilestonesListBinding = FragmentMilestonesListBinding.inflate(inflater)
 
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = this
-
-        // Giving the binding access to the OverviewViewModel
-        binding.viewModel = viewModel
-
-        binding.recyclerView.adapter = MilestonesAdapter(this@MilestonesListFragment)
+        val adapter = MilestonesAdapter(this@MilestonesListFragment)
+        binding.recyclerView.adapter = adapter
+        viewModel.currentMilestones.observe(this.viewLifecycleOwner) { items ->
+            items.let {
+                adapter.submitList(it)
+            }
+        }
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         // Add divider between milestones
         val decoration  = DividerItemDecoration(binding.recyclerView.context, VERTICAL)
@@ -50,7 +52,7 @@ class MilestonesListFragment : Fragment() {
 
         binding.executePendingBindings()
         Log.d("MilestoneListFragment", "Got here!")
-        Log.d("MilestoneListFragment", viewModel.currentMilestones.value.toString())
+        Log.d("MilestoneListFragment", viewModel.currentMilestones.toString())
         return binding.root
     }
 

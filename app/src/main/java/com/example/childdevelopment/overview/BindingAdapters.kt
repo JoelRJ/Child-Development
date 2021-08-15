@@ -12,13 +12,6 @@ val <T : Any > T.classNameKotlin: String?
         return javaClass.kotlin.simpleName
     }
 
-@BindingAdapter("milestoneData")
-fun bindMilestoneRecyclerView(recyclerView: RecyclerView,
-                              listData: List<MilestonesOption>) {
-    val adapter = recyclerView.adapter as? MilestonesAdapter
-    adapter?.submitList(listData)
-}
-
 @BindingAdapter("agesData")
 fun bindRecyclerView(recyclerView: RecyclerView,
                      listData: List<AgesOption>?) {

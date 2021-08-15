@@ -16,13 +16,18 @@ import com.example.childdevelopment.network.MilestonesOption
 
 class MilestonesAdapter(val fragment: MilestonesListFragment) :
     ListAdapter<Milestone, MilestonesAdapter.MilestonesViewHolder>(DiffCallback){
+
     class MilestonesViewHolder(private var binding: MilestonesViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(milestone: Milestone, fragment: MilestonesListFragment) {
-            Log.d("MilestoneAdapter", "Here1")
-            binding.item = milestone
-            binding.milestoneFragment = fragment
-            binding.executePendingBindings()
+            binding.apply {
+                textItem.text = milestone.milestone
+                milestoneCategory.text = milestone.category
+                seeActivitiesButton.setOnClickListener {
+                    fragment.showActivities(milestone)
+                }
+            }
         }
     }
 

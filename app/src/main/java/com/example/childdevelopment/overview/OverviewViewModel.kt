@@ -57,13 +57,28 @@ class OverviewViewModel(private val milestoneDao: MilestoneDao) : ViewModel() {
             try {
                 val listResult = MilestoneApi.retrofitService.getMilestones()
                 _milestonesFromServer.value = listResult
-                Log.d("API_Success", listResult.toString())
+                Log.d("ViewModel: API_Success", listResult.toString())
+                milestoneDao.deleteAll()
+                loadRoom()
             } catch (e: Exception) {
                 _status.value = "Failure: ${e.message}"
                 Log.d("API", e.message.toString())
                 Log.d("API", e.toString())
             }
         }
+    }
+
+    private fun loadRoom() {
+        viewModelScope.launch {
+            // Replace Room milestones with server milestones
+            if (_milestonesFromServer.value != null) {
+                for (element in _milestonesFromServer.value!!) {
+                    Log.d("ViewModel: Room", element.toString())
+                    milestoneDao.addMilestone(element.id, element.milestone, element.category, element.ageRange)
+                }
+            }
+        }
+
     }
 
     private fun getMilestoneActivities() {
@@ -73,13 +88,12 @@ class OverviewViewModel(private val milestoneDao: MilestoneDao) : ViewModel() {
     fun chooseAge(ageText: String) {
         _currentAge = ageText
 
-        // Get all milestones where currentAge from Room
-        currentMilestones = milestoneDao.getMilestones(currentAge).asLiveData()
-
+        currentMilestones = milestoneDao.getMilestones(_currentAge).asLiveData()
         // Get all milestones of certain age from server
         val newList = mutableListOf<MilestonesOption>()
 
         Log.d("OverviewViewModel", _milestonesFromServer.value.toString())
+        Log.d("OverviewViewModel:Age", _currentAge)
         for (element in _milestonesFromServer.value!!) {
             Log.d("OverviewViewModel:b4", element.toString())
             if (element.ageRange == _currentAge) {

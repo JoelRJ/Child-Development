@@ -9,11 +9,16 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.childdevelopment.database.MilestoneApplication
 import com.example.childdevelopment.databinding.FragmentActivitiesListBinding
 
 
 class ActivitiesListFragment : Fragment() {
-    private val viewModel: OverviewViewModel by activityViewModels()
+    private val viewModel: OverviewViewModel by activityViewModels() {
+        OverviewViewModelFactory(
+            (activity?.application as MilestoneApplication).database.milestoneDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
