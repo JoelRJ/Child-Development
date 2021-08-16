@@ -19,12 +19,4 @@ fun bindRecyclerView(recyclerView: RecyclerView,
     adapter?.submitList(listData)
 }
 
-@BindingAdapter("activitiesData")
-fun bindActivitiesRecyclerView(recyclerView: RecyclerView,
-                               listData: List<String>?) {
-    val adapter = recyclerView.adapter as? ActivitiesAdapter
-    Log.d("BindingAdapters", listData?.classNameKotlin.toString())
-    adapter?.submitList(listData)
-}
-
 

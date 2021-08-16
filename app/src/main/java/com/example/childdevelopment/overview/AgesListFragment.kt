@@ -21,7 +21,7 @@ import com.example.childdevelopment.databinding.FragmentAgesListBinding
 class AgesListFragment : Fragment() {
     private val viewModel: OverviewViewModel by activityViewModels() {
         OverviewViewModelFactory(
-            (activity?.application as MilestoneApplication).database.milestoneDao()
+            (activity?.application as MilestoneApplication)
         )
     }
 

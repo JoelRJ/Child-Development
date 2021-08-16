@@ -2,8 +2,7 @@ package com.example.childdevelopment.overview
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.childdevelopment.database.Milestone
-import com.example.childdevelopment.database.MilestoneDao
+import com.example.childdevelopment.database.*
 import com.example.childdevelopment.network.AgesOption
 import com.example.childdevelopment.network.ApiService
 import com.example.childdevelopment.network.MilestoneApi
@@ -14,7 +13,9 @@ import kotlinx.coroutines.launch
 /**
  * The [ViewModel] that is attached to the [AgesListFragment].
  */
-class OverviewViewModel(private val milestoneDao: MilestoneDao) : ViewModel() {
+class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
+    private val milestoneDao: MilestoneDao = application.database.milestoneDao()
+    private val activityDao: ActivityDao = application.database.activityDao()
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<String>()
@@ -37,6 +38,9 @@ class OverviewViewModel(private val milestoneDao: MilestoneDao) : ViewModel() {
     // Activities for the chosen milestone
     private val _milestoneActivities = MutableLiveData<List<String>>()
     val milestoneActivities: LiveData<List<String>> = _milestoneActivities
+
+    // Activities for current Milestone
+    lateinit var currentActivities: LiveData<List<Activity>>
 
     init {
         getAges()
@@ -75,14 +79,15 @@ class OverviewViewModel(private val milestoneDao: MilestoneDao) : ViewModel() {
                 for (element in _milestonesFromServer.value!!) {
                     Log.d("ViewModel: Room", element.toString())
                     milestoneDao.addMilestone(element.id, element.milestone, element.category, element.ageRange)
+
+                    // Add activities to Activity entity
+                    for (activity in element.activities) {
+                        activityDao.addActivity(element.id, activity)
+                    }
                 }
             }
         }
 
-    }
-
-    private fun getMilestoneActivities() {
-        _milestoneActivities.value = listOf("Activity1", "Activity2")
     }
 
     fun chooseAge(ageText: String) {
@@ -104,20 +109,20 @@ class OverviewViewModel(private val milestoneDao: MilestoneDao) : ViewModel() {
 
         }
         //_currentMilestones.value = newList
-        Log.d("OverviewViewModel:after", currentMilestones.value.toString())
+        Log.d("OverviewViewModel:after", currentMilestones.toString())
     }
 
     fun chooseMilestone(milestone: Milestone) {
-        //_milestoneActivities.value = milestone.activities
-        Log.d("OverviewViewModel", milestoneActivities.value.toString())
+        currentActivities = activityDao.getActivities(milestone.id).asLiveData()
+        Log.d("ViewModel:Activity", currentActivities.toString())
     }
 }
 
-class OverviewViewModelFactory(private val milestoneDao: MilestoneDao) : ViewModelProvider.Factory {
+class OverviewViewModelFactory(private val application: MilestoneApplication) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(OverviewViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return OverviewViewModel(milestoneDao) as T
+            return OverviewViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

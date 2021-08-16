@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Activity (
-    @PrimaryKey val id: String,
-    @NonNull @ColumnInfo val milestone: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    @NonNull @ColumnInfo val milestoneId: String,
     @NonNull @ColumnInfo val activity: String
 )

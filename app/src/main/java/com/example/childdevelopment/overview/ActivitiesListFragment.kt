@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.childdevelopment.database.MilestoneApplication
 import com.example.childdevelopment.databinding.FragmentActivitiesListBinding
 
@@ -16,7 +17,7 @@ import com.example.childdevelopment.databinding.FragmentActivitiesListBinding
 class ActivitiesListFragment : Fragment() {
     private val viewModel: OverviewViewModel by activityViewModels() {
         OverviewViewModelFactory(
-            (activity?.application as MilestoneApplication).database.milestoneDao()
+            (activity?.application as MilestoneApplication)
         )
     }
 
@@ -32,13 +33,14 @@ class ActivitiesListFragment : Fragment() {
     ): View {
         val binding: FragmentActivitiesListBinding = FragmentActivitiesListBinding.inflate(inflater)
 
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
-        binding.lifecycleOwner = this
-
-        // Giving the binding access to the OverviewViewModel
-        binding.viewModel = viewModel
-
-        binding.recyclerView.adapter = ActivitiesAdapter()
+        val adapter = ActivitiesAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.currentActivities.observe(this.viewLifecycleOwner) { items ->
+            items.let {
+                adapter.submitList(it)
+            }
+        }
+        binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         // Add divider between milestones
         val decoration  = DividerItemDecoration(binding.recyclerView.context, LinearLayout.VERTICAL)
