@@ -1,0 +1,7 @@
+Flask==1.1.2
+google-cloud-datastore==2.1.0
+python-jose
+six
+python-dotenv
+requests
+authlib
