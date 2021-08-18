@@ -1,6 +1,7 @@
 package com.example.childdevelopment.overview
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -52,7 +53,6 @@ class MilestonesListFragment : Fragment() {
 
         binding.executePendingBindings()
         Log.d("MilestoneListFragment", "Got here!")
-        Log.d("MilestoneListFragment", viewModel.currentMilestones.toString())
         return binding.root
     }
 
@@ -60,7 +60,6 @@ class MilestonesListFragment : Fragment() {
         Log.d("MilestonesListFragment", "Here0")
         viewModel.chooseMilestone(milestone)
         Log.d("MilestonesListFragment", "Here1")
-        Log.d("MilestonesListFragment", viewModel.milestoneActivities.value.toString())
         findNavController().navigate(R.id.action_milestonesListFragment_to_activitiesListFragment)
     }
 }

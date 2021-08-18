@@ -1,12 +1,16 @@
 package com.example.childdevelopment.database
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
 // https://medium.com/@tonia.tkachuk/android-app-example-using-room-database-63f7091e69af
-@Database(entities = [Milestone::class, Activity::class], version = 2, exportSchema = false)
+@Database(
+    entities = [Milestone::class, Activity::class],
+    version = 2,
+    exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun milestoneDao(): MilestoneDao
     abstract fun activityDao(): ActivityDao
@@ -21,7 +25,10 @@ abstract class AppDatabase: RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database")
-                    .fallbackToDestructiveMigration() // https://stackoverflow.com/questions/49629656/please-provide-a-migration-in-the-builder-or-call-fallbacktodestructivemigration
+                        // TODO: https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
+                    // https://developer.android.com/training/data-storage/room/migrating-db-versions
+                    //.fallbackToDestructiveMigration()
+                    // https://stackoverflow.com/questions/49629656/please-provide-a-migration-in-the-builder-or-call-fallbacktodestructivemigration
                     .build()
                 INSTANCE = instance
 

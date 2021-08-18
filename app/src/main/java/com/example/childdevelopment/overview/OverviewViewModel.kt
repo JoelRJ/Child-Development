@@ -10,6 +10,7 @@ import com.example.childdevelopment.network.MilestonesOption
 import com.example.childdevelopment.overview.allAgesList
 import kotlinx.coroutines.launch
 
+
 /**
  * The [ViewModel] that is attached to the [AgesListFragment].
  */
@@ -33,11 +34,7 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
     private val _milestonesFromServer = MutableLiveData<List<MilestonesOption>>()
 
     // Milestones which apply to currentAge
-    lateinit var currentMilestones: LiveData<List<Milestone>>
-
-    // Activities for the chosen milestone
-    private val _milestoneActivities = MutableLiveData<List<String>>()
-    val milestoneActivities: LiveData<List<String>> = _milestoneActivities
+    lateinit var currentMilestones: LiveData<List<Milestone>> //= milestoneDao.getMilestones("0 to 1 Month").asLiveData()
 
     // Activities for current Milestone
     lateinit var currentActivities: LiveData<List<Activity>>
@@ -63,6 +60,7 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
                 _milestonesFromServer.value = listResult
                 Log.d("ViewModel: API_Success", listResult.toString())
                 milestoneDao.deleteAll()
+                activityDao.deleteAll()
                 loadRoom()
             } catch (e: Exception) {
                 _status.value = "Failure: ${e.message}"
@@ -93,21 +91,11 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
     fun chooseAge(ageText: String) {
         _currentAge = ageText
 
+
+        // Because using LiveData already handled on background thread
         currentMilestones = milestoneDao.getMilestones(_currentAge).asLiveData()
-        // Get all milestones of certain age from server
-        val newList = mutableListOf<MilestonesOption>()
 
-        Log.d("OverviewViewModel", _milestonesFromServer.value.toString())
-        Log.d("OverviewViewModel:Age", _currentAge)
-        for (element in _milestonesFromServer.value!!) {
-            Log.d("OverviewViewModel:b4", element.toString())
-            if (element.ageRange == _currentAge) {
 
-                Log.d("OverviewViewModel:Insid", element.toString())
-                newList.add(element)
-            }
-
-        }
         //_currentMilestones.value = newList
         Log.d("OverviewViewModel:after", currentMilestones.toString())
     }

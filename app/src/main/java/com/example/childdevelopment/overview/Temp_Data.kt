@@ -7,17 +7,17 @@ import java.util.*
 
 val allAgesList: List<AgesOption> =
         listOf(
-                AgesOption(0, "0 to 1 month"),
-                AgesOption(1,"1 to 2 months"),
-                AgesOption(2,"2 to 4 months"),
-                AgesOption(3,"4 to 6 months"),
-                AgesOption(4, "6 to 9 months"),
-                AgesOption(5,"9 to 12 months"),
-                AgesOption(6,"12 to 18 months"),
-                AgesOption(7, "18 to 24 months"),
-                AgesOption(8, "2 to 3 years"),
-                AgesOption(9, "3 to 4 years"),
-                AgesOption(10, "4 to 5 years")
+                AgesOption(0, "0 to 1 Month"),
+                AgesOption(1,"1 to 2 Months"),
+                AgesOption(2,"2 to 4 Months"),
+                AgesOption(3,"4 to 6 Months"),
+                AgesOption(4, "6 to 9 Months"),
+                AgesOption(5,"9 to 12 Months"),
+                AgesOption(6,"12 to 18 Months"),
+                AgesOption(7, "18 to 24 Months"),
+                AgesOption(8, "2 to 3 Years"),
+                AgesOption(9, "3 to 4 Years"),
+                AgesOption(10, "4 to 5 Years")
         )
 
 var id = 0

@@ -55,6 +55,7 @@ class AgesListFragment : Fragment() {
     }
 
     fun goToNextScreen(selectedAge: String) {
+        Log.d("fragment_activities", selectedAge)
         viewModel.chooseAge(selectedAge)
 
         val action = AgesListFragmentDirections.
