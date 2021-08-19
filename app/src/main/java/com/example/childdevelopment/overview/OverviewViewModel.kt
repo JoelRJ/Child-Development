@@ -1,5 +1,8 @@
 package com.example.childdevelopment.overview
 
+import android.R
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.childdevelopment.database.*
@@ -39,7 +42,12 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
     // Activities for current Milestone
     lateinit var currentActivities: LiveData<List<Activity>>
 
+
+
     init {
+
+
+
         getAges()
         Log.d("OverviewViewModel:Ages", ages.value.toString())
         getMilestones()
