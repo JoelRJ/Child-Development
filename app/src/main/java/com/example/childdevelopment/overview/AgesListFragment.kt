@@ -39,7 +39,7 @@ class AgesListFragment : Fragment() {
         val defaultValue = resources.getString(com.example.childdevelopment.R.string.default_database_version)
         val databaseVersion = sharedPref.getString(getString(com.example.childdevelopment.R.string.database_version), defaultValue)
 
-        // THIS OCCURS BEFORE VIEWMODEL INIT
+        viewModel.databaseVersion = databaseVersion!!
 
         // Put database version into sharedPreferences IF database version has been changed
         sharedPref  = this.getActivity()?.getSharedPreferences(getString(com.example.childdevelopment.R.string.file_key), Context.MODE_PRIVATE)

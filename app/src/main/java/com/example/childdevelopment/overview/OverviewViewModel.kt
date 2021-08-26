@@ -42,7 +42,8 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
     // Activities for current Milestone
     lateinit var currentActivities: LiveData<List<Activity>>
 
-
+    // Database version
+    lateinit var databaseVersion: String
 
     init {
 
