@@ -7,6 +7,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="database_version">child_development.database_version</string>
     <string name="file_key">child_development.shared_preferences</string>
-    <string name="default_database_version">version 0</string>
+    <string name="default_database_version">0</string>
 
 </resources>

@@ -40,15 +40,6 @@ class AgesListFragment : Fragment() {
         val databaseVersion = sharedPref.getString(getString(com.example.childdevelopment.R.string.database_version), defaultValue)
 
         viewModel.databaseVersion = databaseVersion!!
-
-        // Put database version into sharedPreferences IF database version has been changed
-        sharedPref  = this.getActivity()?.getSharedPreferences(getString(com.example.childdevelopment.R.string.file_key), Context.MODE_PRIVATE)
-            ?: return
-        with (sharedPref.edit()) {
-            putString(getString(R.string.database_version), "version 1")
-            apply()
-        }
-
     }
 
     override fun onCreateView(
@@ -82,5 +73,19 @@ class AgesListFragment : Fragment() {
         val action = AgesListFragmentDirections.
             actionAgesListFragmentToMilestonesListFragment(age = selectedAge)
         findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Put database version into sharedPreferences IF database version has been changed
+        sharedPref  = this.getActivity()?.getSharedPreferences(getString(com.example.childdevelopment.R.string.file_key), Context.MODE_PRIVATE)
+            ?: return
+        with (sharedPref.edit()) {
+            putString(getString(R.string.database_version), viewModel.serverVersion)
+            apply()
+        }
+
+        Log.d("AgesListFragment:OnDest", viewModel.serverVersion)
     }
 }

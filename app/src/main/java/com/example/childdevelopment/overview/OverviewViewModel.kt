@@ -6,12 +6,11 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.childdevelopment.database.*
-import com.example.childdevelopment.network.AgesOption
-import com.example.childdevelopment.network.ApiService
-import com.example.childdevelopment.network.MilestoneApi
-import com.example.childdevelopment.network.MilestonesOption
+import com.example.childdevelopment.network.*
 import com.example.childdevelopment.overview.allAgesList
 import kotlinx.coroutines.launch
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 /**
@@ -44,15 +43,30 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
 
     // Database version
     lateinit var databaseVersion: String
+    lateinit var serverVersion: String
 
     init {
-
-
-
+        checkDatabase()
         getAges()
         Log.d("OverviewViewModel:Ages", ages.value.toString())
-        getMilestones()
-        Log.d("OverviewViewModel:Miles", _milestonesFromServer.value.toString())
+    }
+
+    private fun checkDatabase() {
+        viewModelScope.launch {
+            try {
+                val response = MilestoneApi.retrofitService.getDatabaseVersion()
+                serverVersion = response.body()?.database_version.toString()
+                if (serverVersion != databaseVersion) {
+                    getMilestones()
+                    Log.d("ViewModel", "Updated dataset because $serverVersion != $databaseVersion")
+                }
+            } catch (e: Exception) {
+                _status.value = "Failure: ${e.message}"
+                Log.d("API", e.message.toString())
+                Log.d("API", e.toString())
+            }
+        }
+
     }
 
     private fun getAges() {
