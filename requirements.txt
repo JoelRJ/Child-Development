@@ -5,3 +5,5 @@ six
 python-dotenv
 requests
 authlib
+pandas
+openpyxl

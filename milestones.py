@@ -1,6 +1,6 @@
 # Routing functions for milestones 
 
-from flask import Blueprint, request
+from flask import Blueprint, request, redirect, url_for
 from google.cloud import datastore
 import json
 import pandas as pd
@@ -10,14 +10,23 @@ client = datastore.Client()
 bp = Blueprint('milestones', __name__, url_prefix='/milestones')
 
 # Update entire milestone entity after deleting all milestones
-@bp.route('/update_list', methods = ['GET'])
+@bp.route('/update_list', methods = ['POST'])
 def milestones_update_all():
-	if request.method == 'GET':
-
+	if request.method == 'POST':
 		try:
-			file_name = 'test.xlsx'
-			df = pd.read_excel(io=file_name, sheet_name=None)
+			# Read file
+			file_name = 'latest.xlsx'
+			df = pd.read_excel(request.files['file'], sheet_name=None)
+
+			# Fetch all milestones
+			query = client.query(kind='milestones')
+			all_milestones = list(query.fetch())
 			
+			# Delete all milestones previously in entity
+			for e in all_milestones:
+				milestone_key = client.key('milestones', int(e.key.id))
+				client.delete(milestone_key)			
+
 			# https://pythoninoffice.com/get-values-rows-and-columns-in-pandas-dataframe/
 			for element in df:
 				if element != 'Categories':
@@ -39,11 +48,33 @@ def milestones_update_all():
 							})
 							client.put(new_milestone)
 			
-			return {}, 200, {'Content-Type':'application/json'} 
+			# Update the database version in the database_version entity
+			# Set up entity and add to client
+			query = client.query(kind='database_version')
+
+			# Fetch milestones
+			database_version = list(query.fetch())[0]
+
+			versionString = str(int(database_version["database_version"]) + 1)
+
+			database_version.update({
+				'database_version': versionString
+			})
+
+			client.put(database_version)	
+			
+			return json.dumps({"success": "Dataset updated."}), 201, {'Content-Type':'application/json'} 
 		except:
-			return {}, 404, {'Content-Type':'application/json'} 
-	
-	
+			return json.dumps({"error": "Could not update dataset."}), 404, {'Content-Type':'application/json'} 
+
+# Get database version
+@bp.route('/database_version', methods=['GET'])
+def get_database_version():
+	# Get database_version entity
+	query = client.query(kind='database_version')
+	database_version = list(query.fetch())[0]
+	versionString = database_version["database_version"]
+	return json.dumps({'database_version':versionString}), 201, {'Content-Type':'application/json'} 
 
 # Routing function for getting and adding a milestone to the database
 @bp.route('', methods = ['GET', 'POST'])
