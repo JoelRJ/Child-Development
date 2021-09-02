@@ -21,6 +21,9 @@ class ActivitiesListFragment : Fragment() {
         )
     }
 
+    private var _binding: FragmentActivitiesListBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -31,9 +34,15 @@ class ActivitiesListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentActivitiesListBinding = FragmentActivitiesListBinding.inflate(inflater)
+        _binding = FragmentActivitiesListBinding.inflate(inflater)
 
-        val adapter = ActivitiesAdapter()
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val adapter = ActivitiesAdapter(viewModel)
         binding.recyclerView.adapter = adapter
         viewModel.currentActivities.observe(this.viewLifecycleOwner) { items ->
             items.let {
@@ -48,6 +57,5 @@ class ActivitiesListFragment : Fragment() {
 
         binding.executePendingBindings()
         Log.d("ActivitieslistFragment", "Got here!")
-        return binding.root
     }
 }

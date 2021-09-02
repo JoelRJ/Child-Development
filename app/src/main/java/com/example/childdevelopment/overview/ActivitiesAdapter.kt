@@ -11,13 +11,30 @@ import com.example.childdevelopment.databinding.ActivitiesViewItemBinding
 import com.example.childdevelopment.network.MilestonesOption
 
 
-class ActivitiesAdapter :
+class ActivitiesAdapter(val viewModel: OverviewViewModel) :
     ListAdapter<Activity, ActivitiesAdapter.ActivitiesViewHolder>(DiffCallback){
 
     class ActivitiesViewHolder(private var binding: ActivitiesViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(activity: Activity) {
+        fun bind(activity: Activity, viewModel: OverviewViewModel) {
+            binding.checkBox.isChecked = activity.isChecked == 1
+
+            Log.d("Checkbox", activity.isChecked.toString())
+
+            binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                Log.d("Checkbox", "Clicked! ${isChecked.toString()}")
+                if (isChecked) {
+                    activity.isChecked = 1
+                    Log.d("isChecked", activity.activity)
+                }
+                else {
+                    activity.isChecked = 0
+                }
+
+                viewModel.checkActivity(activity)
+            }
+
             binding.apply {
                 textItem.text = activity.activity
             }
@@ -44,6 +61,6 @@ class ActivitiesAdapter :
 
     override fun onBindViewHolder(holder: ActivitiesViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, viewModel)
     }
 }

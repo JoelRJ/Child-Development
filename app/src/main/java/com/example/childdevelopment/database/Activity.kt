@@ -10,5 +10,6 @@ data class Activity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     @NonNull @ColumnInfo val milestoneId: String,
-    @NonNull @ColumnInfo val activity: String
+    @NonNull @ColumnInfo val activity: String,
+    @ColumnInfo var isChecked: Int = 0
 )

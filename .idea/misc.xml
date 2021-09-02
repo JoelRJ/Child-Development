@@ -3,9 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/drawable-anydpi-v24/ic_launcher_background.xml" value="0.49722222222222223" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/drawable-anydpi-v24/ic_launcher_foreground.xml" value="0.49722222222222223" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.44051282051282054" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/drawable/ic_app.xml" value="0.44051282051282054" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/drawable/ic_app_background.xml" value="0.3828125" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.44051282051282054" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/layout/activities_view_item.xml" value="0.1" />
         <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/layout/ages_view_item.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/layout/fragment_ages_list.xml" value="0.2689969604863222" />
         <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/layout/milestones_view_item.xml" value="0.22613065326633167" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.44051282051282054" />
+        <entry key="..\:/Users/ridin/AndroidStudioProjects/ChildDevelopment2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.44051282051282054" />
       </map>
     </option>
   </component>

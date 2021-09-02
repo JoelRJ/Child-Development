@@ -8,5 +8,6 @@
     <string name="database_version">child_development.database_version</string>
     <string name="file_key">child_development.shared_preferences</string>
     <string name="default_database_version">0</string>
+    <string name="activities_button">See activities</string>
 
 </resources>

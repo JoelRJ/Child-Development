@@ -127,6 +127,12 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
         currentActivities = activityDao.getActivities(milestone.id).asLiveData()
         Log.d("ViewModel:Activity", currentActivities.toString())
     }
+
+    fun checkActivity(activity: Activity) {
+        viewModelScope.launch {
+            activityDao.updateCheckbox(activity.id, activity.isChecked)
+        }
+    }
 }
 
 class OverviewViewModelFactory(private val application: MilestoneApplication) : ViewModelProvider.Factory {
