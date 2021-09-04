@@ -53,7 +53,7 @@
               <a class="nav-link" aria-current="page" href="#intro"><strong>Home</strong></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about_the_developer.html">About the Developer</a>
+              <a class="nav-link" href="about_me">About the Developer</a>
             </li>
           </ul>
 
@@ -110,7 +110,7 @@
         <div class="row">
           <div class="col-md-6 gx-5 mb-4">
             <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-              <img src="https://mdbootstrap.com/img/new/slides/031.jpg" class="img-fluid" />
+              <img src="../static/img/feature_graphic.jpg" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
@@ -118,17 +118,13 @@
           </div>
 
           <div class="col-md-6 gx-5 mb-4">
-            <h4><strong>Join our mailing list!</strong></h4>
+            <h4><strong>How is our Milestone Tracker different?</strong></h4>
             <p class="text-muted">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur
-              eligendi quisquam doloremque vero ex debitis veritatis placeat unde animi laborum
-              sapiente illo possimus, commodi dignissimos obcaecati illum maiores corporis.
-            </p>
-            <p><strong>Doloremque vero ex debitis veritatis?</strong></p>
-            <p class="text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod itaque voluptate
-              nesciunt laborum incidunt. Officia, quam consectetur. Earum eligendi aliquam illum
-              alias, unde optio accusantium soluta, iusto molestiae adipisci et?
+              Our tracker is not just a tracker, but contains helpful activities that will help 
+			  your child hit those milestones. If you are like us, and are frustrated when you go to 
+			  the doctor's office, fill out those CDC milestone sheets, and then are told that your 
+			  baby isn't meeting certain developmental stages (with no practical advice on how to help them)
+			   then this app is for you. 
             </p>
           </div>
         </div>
@@ -139,24 +135,23 @@
 
       <!--Section: Content-->
       <section class="text-center">
-        <h4 class="mb-5"><strong>Join our mailing list!</strong></h4>
+        <h4 class="mb-5"><strong>How it works</strong></h4>
 
         <div class="row">
           <div class="col-lg-4 col-md-12 mb-4">
             <div class="card">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
+                <img src="../static/img/age_range.jpg" class="img-fluid" />
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Select an age range</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the
-                  card's content.
+                  Select the age range of your child. Know that this is just an estimate! Each baby is different (mine were!) and you should
+				   choose the age range that has the milestones you would like to work on. 
                 </p>
-                <a href="#!" class="btn btn-primary">Button</a>
               </div>
             </div>
           </div>
@@ -164,18 +159,17 @@
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" class="img-fluid" />
+                <img src="../static/img/milestones.jpg" class="img-fluid" />
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Select a milestone</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the
-                  card's content.
+                  Milestones are divided into categories: physical, intellectual, social and emotional. These milestones come 
+				  from the CDC list of milestones that a child should be hitting at the appropriate age.
                 </p>
-                <a href="#!" class="btn btn-primary">Button</a>
               </div>
             </div>
           </div>
@@ -183,18 +177,17 @@
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
+                <img src="../static/img/activities.jpg" class="img-fluid" />
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Check off activities</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the
-                  card's content.
+                  Each milestone has their own set of activities that you can do with your child to help hit that milestone. Activities 
+				  should be completed many times as they need as this is a big learning experience!
                 </p>
-                <a href="#!" class="btn btn-primary">Button</a>
               </div>
             </div>
           </div>
@@ -210,12 +203,13 @@
 
         <div class="row d-flex justify-content-center">
           <div class="col-md-6">
-            <form>
+            <form action = "/send_me_updates" method = "POST" 
+				enctype = "multipart/form-data">
               <!-- Name -->
               <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="name" class="form-control" />
+                    <input type="text" id="name" name="user_name" class="form-control" />
                     <label class="form-label" for="name">Name</label>
                   </div>
                 </div>
@@ -223,13 +217,13 @@
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="email" class="form-control" />
+                <input type="email" id="email" name="user_email" class="form-control" />
                 <label class="form-label" for="email">Email address</label>
               </div>
 
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
-                Sign up
+              <button type="submit" class="btn btn-primary btn-block mb-4 select_button">
+                <strong> Sign up </strong>
               </button>
             </form>
           </div>
@@ -245,11 +239,11 @@
 
     <div class="text-center py-4 align-items-center">
       <p>Follow Head & Heart on social media</p>
-      <a href="https://www.instagram.com/headandheartco/" class="btn btn-primary m-1" role="button" rel="nofollow"
+      <a href="https://www.instagram.com/headandheartco/" class="btn all_buttons btn-primary m-1 footer_buttons" role="button" rel="nofollow"
         target="_blank">
         <i class="fab fa-instagram"></i>
       </a>
-      <a href="https://github.com/JoelRJ" class="btn btn-primary m-1" role="button" rel="nofollow"
+      <a href="https://github.com/JoelRJ" class="btn btn-primary m-1 footer_buttons" role="button" rel="nofollow"
         target="_blank">
         <i class="fab fa-github"></i>
       </a>
@@ -262,10 +256,5 @@
     </div>
     <!-- Copyright -->
   </footer>
-  <!--Footer-->
-		    <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>		

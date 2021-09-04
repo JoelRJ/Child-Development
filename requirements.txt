@@ -7,3 +7,4 @@ requests
 authlib
 pandas
 openpyxl
+Flask-Mail
