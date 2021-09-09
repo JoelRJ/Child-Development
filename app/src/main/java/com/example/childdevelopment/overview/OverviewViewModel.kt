@@ -36,7 +36,7 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
     private val _milestonesFromServer = MutableLiveData<List<MilestonesOption>>()
 
     // Milestones which apply to currentAge
-    lateinit var currentMilestones: LiveData<List<Milestone>> //= milestoneDao.getMilestones("0 to 1 Month").asLiveData()
+    lateinit var currentMilestones: LiveData<List<Milestone>>
 
     // Activities for current Milestone
     lateinit var currentActivities: LiveData<List<Activity>>
@@ -45,9 +45,11 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
     lateinit var databaseVersion: String
     lateinit var serverVersion: String
 
+    private lateinit var sharedPref: SharedPreferences
+
     init {
-        checkDatabase()
         getAges()
+        checkDatabase()
         Log.d("OverviewViewModel:Ages", ages.value.toString())
     }
 
@@ -56,6 +58,9 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
             try {
                 val response = MilestoneApi.retrofitService.getDatabaseVersion()
                 serverVersion = response.body()?.database_version.toString()
+                getRoomVersion()
+                Log.d("ViewModel", serverVersion)
+
                 if (serverVersion != databaseVersion) {
                     getMilestones()
                     Log.d("ViewModel", "Updated dataset because $serverVersion != $databaseVersion")
@@ -71,6 +76,22 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
 
     private fun getAges() {
         _ages.value = allAgesList
+    }
+
+    // Get local database version from sharedPreferences
+    private fun getRoomVersion() {
+        // Access the sharedPreferences value for database version, version 0 if no value exists
+        sharedPref = application.getSharedPreferences(
+            application.resources.getString(com.example.childdevelopment.R.string.file_key),
+            Context.MODE_PRIVATE)
+        val defaultValue = application.resources.getString(com.example.childdevelopment.R.string.default_database_version)
+        databaseVersion = sharedPref.getString(application.getString(com.example.childdevelopment.R.string.database_version), defaultValue)!!
+
+        // Put database version into sharedPreferences
+        with (sharedPref.edit()) {
+            putString(application.resources.getString(com.example.childdevelopment.R.string.database_version), serverVersion)
+            apply()
+        }
     }
 
     // API request from server for all milestones
@@ -108,7 +129,6 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
                 }
             }
         }
-
     }
 
     fun chooseAge(ageText: String) {
@@ -117,7 +137,6 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
 
         // Because using LiveData already handled on background thread
         currentMilestones = milestoneDao.getMilestones(_currentAge).asLiveData()
-
 
         //_currentMilestones.value = newList
         Log.d("OverviewViewModel:after", currentMilestones.toString())

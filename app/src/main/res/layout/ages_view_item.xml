@@ -16,14 +16,14 @@
 
         <TextView
             android:id="@+id/text_item"
-            android:text="@{item.ageRange}"
-            android:onClick="@{() -> ageFragment.goToNextScreen(item.ageRange)}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="10dp"
             android:gravity="top"
-            android:layout_margin="4dp"
-            android:padding="2dp"
-            android:textSize="20sp"/>
+            android:onClick="@{() -> ageFragment.goToNextScreen(item.ageRange)}"
+            android:text="@{item.ageRange}"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 </layout>

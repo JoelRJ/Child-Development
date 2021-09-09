@@ -51,10 +51,6 @@ class ActivitiesListFragment : Fragment() {
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        // Add divider between milestones
-        val decoration  = DividerItemDecoration(binding.recyclerView.context, LinearLayout.VERTICAL)
-        binding.recyclerView.addItemDecoration(decoration)
-
         binding.executePendingBindings()
         Log.d("ActivitieslistFragment", "Got here!")
     }

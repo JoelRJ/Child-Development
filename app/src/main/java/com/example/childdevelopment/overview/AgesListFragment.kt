@@ -21,7 +21,6 @@ import com.example.childdevelopment.database.MilestoneApplication
 import com.example.childdevelopment.databinding.FragmentAgesListBinding
 
 class AgesListFragment : Fragment() {
-    private lateinit var sharedPref: SharedPreferences
     private val viewModel: OverviewViewModel by activityViewModels() {
         OverviewViewModelFactory(
             (activity?.application as MilestoneApplication)
@@ -31,15 +30,6 @@ class AgesListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
-        // Access the sharedPreferences value for database version, version 0 if no value exists
-        sharedPref = this.getActivity()?.getSharedPreferences(
-            getString(com.example.childdevelopment.R.string.file_key),
-            Context.MODE_PRIVATE) ?: return
-        val defaultValue = resources.getString(com.example.childdevelopment.R.string.default_database_version)
-        val databaseVersion = sharedPref.getString(getString(com.example.childdevelopment.R.string.database_version), defaultValue)
-
-        viewModel.databaseVersion = databaseVersion!!
     }
 
     override fun onCreateView(
@@ -77,15 +67,5 @@ class AgesListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        // Put database version into sharedPreferences IF database version has been changed
-        sharedPref  = this.getActivity()?.getSharedPreferences(getString(com.example.childdevelopment.R.string.file_key), Context.MODE_PRIVATE)
-            ?: return
-        with (sharedPref.edit()) {
-            putString(getString(R.string.database_version), viewModel.serverVersion)
-            apply()
-        }
-
-        Log.d("AgesListFragment:OnDest", viewModel.serverVersion)
     }
 }

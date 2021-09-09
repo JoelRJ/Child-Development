@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- https://coolors.co/84e3c8-a8e6cf-dcedc1-ffd3b6-b6ccfe-ffaaa5-ff8b94-ff7480 -->
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="main_pink">#ffaaa5</color>
+    <color name="light_pink">#ffdcd6</color>
+    <color name="dark_pink">#ca7a76</color>
+    <color name="main_blue">#b6ccfe</color>
+    <color name="light_blue">#e9ffff</color>
+    <color name="dark_blue">#859bcb</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background_grey">#E9E9E9</color>
 </resources>

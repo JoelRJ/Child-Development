@@ -37,6 +37,9 @@ class ActivitiesAdapter(val viewModel: OverviewViewModel) :
 
             binding.apply {
                 textItem.text = activity.activity
+                textItem.setOnClickListener {
+                    checkBox.performClick()
+                }
             }
         }
     }
