@@ -102,7 +102,7 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
             try {
                 val listResult = MilestoneApi.retrofitService.getMilestones()
                 _milestonesFromServer.value = listResult
-                Log.d("ViewModel: API_Success", listResult.toString())
+                Log.d("ViewModel:API_Success", listResult.toString())
                 milestoneDao.deleteAll()
                 activityDao.deleteAll()
                 loadRoom()
@@ -119,8 +119,11 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
             // Replace Room milestones with server milestones
             if (_milestonesFromServer.value != null) {
                 for (element in _milestonesFromServer.value!!) {
-                    Log.d("ViewModel: Room", element.toString())
-                    milestoneDao.addMilestone(element.id, element.milestone, element.category, element.ageRange)
+                    Log.d("ViewModel:Room", element.toString())
+
+                    var hasActivity = if(element.activities.isNotEmpty()) 1 else 0
+
+                    milestoneDao.addMilestone(element.id, element.milestone, element.category, element.ageRange, hasActivity)
 
                     // Add activities to Activity entity
                     for (activity in element.activities) {

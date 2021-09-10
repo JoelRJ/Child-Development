@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -24,6 +25,9 @@ class MilestonesAdapter(val fragment: MilestonesListFragment) :
             binding.apply {
                 textItem.text = milestone.milestone
                 milestoneCategory.text = milestone.category
+                if (milestone.hasActivities == 0) {
+                    seeActivitiesButton.isVisible = false
+                }
                 seeActivitiesButton.setOnClickListener {
                     fragment.showActivities(milestone)
                 }

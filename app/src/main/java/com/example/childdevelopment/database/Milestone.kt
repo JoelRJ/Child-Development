@@ -10,5 +10,6 @@ data class Milestone(
     @PrimaryKey val id: String,
     @NonNull @ColumnInfo val milestone: String,
     @NonNull @ColumnInfo val category: String,
-    @NonNull @ColumnInfo val ageRange: String
+    @NonNull @ColumnInfo val ageRange: String,
+    @NonNull @ColumnInfo val hasActivities: Int
 )

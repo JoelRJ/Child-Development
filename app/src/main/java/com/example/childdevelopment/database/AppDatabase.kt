@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 // https://medium.com/@tonia.tkachuk/android-app-example-using-room-database-63f7091e69af
 @Database(
-    version = 3,
+    version = 4,
     entities = [Milestone::class, Activity::class],
     exportSchema = false
 )
@@ -30,6 +30,12 @@ abstract class AppDatabase: RoomDatabase() {
             }
         }
 
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE Milestone ADD COLUMN hasActivities INTEGER NOT NULL")
+            }
+        }
+
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -41,6 +47,7 @@ abstract class AppDatabase: RoomDatabase() {
                     //.fallbackToDestructiveMigration()
                     // https://stackoverflow.com/questions/49629656/please-provide-a-migration-in-the-builder-or-call-fallbacktodestructivemigration
                     .addMigrations((MIGRATION_2_3))
+                    .addMigrations((MIGRATION_3_4))
                     .build()
                 INSTANCE = instance
 

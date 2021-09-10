@@ -12,8 +12,8 @@ interface MilestoneDao {
     @Query("SELECT * FROM milestone WHERE ageRange = :ageIn")
     fun getMilestones(ageIn: String): Flow<List<Milestone>>
 
-    @Query("INSERT INTO milestone VALUES (:id, :milestone, :category, :age)")
-    suspend fun addMilestone(id: String, milestone: String, category: String, age: String)
+    @Query("INSERT INTO milestone VALUES (:id, :milestone, :category, :age, :hasActivity)")
+    suspend fun addMilestone(id: String, milestone: String, category: String, age: String, hasActivity: Int)
 
     @Insert
     suspend fun insertMilestone(milestone: Milestone)

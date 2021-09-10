@@ -10,7 +10,7 @@ interface ActivityDao {
     @Query("SELECT * FROM activity WHERE milestoneId = :id")
     fun getActivities(id: String): Flow<List<Activity>>
 
-    @Query("INSERT INTO activity (milestoneId, activity) VALUES ( :milestoneId, :activity)")
+    @Query("INSERT INTO activity (milestoneId, activity, isChecked) VALUES (:milestoneId, :activity, 0)")
     suspend fun addActivity(milestoneId: String, activity: String)
 
     @Query("UPDATE activity SET isChecked = :isChecked WHERE id = :id")
