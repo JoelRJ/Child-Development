@@ -2,5 +2,6 @@ package com.example.childdevelopment.network
 
 data class AgesOption(
     val id: Int,
-    val ageRange: String
+    val ageRange: String,
+    val imageId: Int
 )

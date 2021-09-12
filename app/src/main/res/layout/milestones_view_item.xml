@@ -34,6 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:padding="15dp"
                     android:text="@string/activities_button" />
 
 
@@ -42,10 +43,10 @@
                     style="@style/Widget.Milestone.TextView.MilestoneView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:layout_margin="6dp"
                     android:gravity="end"
                     android:padding="2dp"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

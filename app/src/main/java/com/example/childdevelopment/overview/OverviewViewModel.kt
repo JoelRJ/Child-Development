@@ -96,7 +96,6 @@ class OverviewViewModel(val application: MilestoneApplication) : ViewModel() {
 
     // API request from server for all milestones
     private fun getMilestones() {
-        //_milestones.value = allMilestonesList
         Log.d("APIBefore", "Here")
         viewModelScope.launch {
             try {

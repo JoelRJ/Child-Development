@@ -21,6 +21,7 @@ class AgesAdapter(val fragment: AgesListFragment) :
             binding.item = age
             binding.ageFragment = fragment
             binding.executePendingBindings()
+            binding.imageView.setImageResource(age.imageId)
         }
     }
 

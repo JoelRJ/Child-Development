@@ -9,5 +9,6 @@
     <string name="file_key">child_development.shared_preferences</string>
     <string name="default_database_version">0</string>
     <string name="activities_button">See activities</string>
+    <string name="image_description">Child in various developmental stages.</string>
 
 </resources>
