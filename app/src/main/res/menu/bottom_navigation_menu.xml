@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_graph_profiles"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/child_profiles"/>
+    <item
+        android:id="@+id/nav_graph_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_growth"
+        android:title="@string/browse_all"/>
+    <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"/>
+</menu>

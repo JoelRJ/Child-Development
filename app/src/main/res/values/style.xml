@@ -6,4 +6,18 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <!-- Colored style for Bottom NavigationViews.
+     Use the colored style to get a bottom navigation bar with a colorPrimary background and
+     percentages of colorOnPrimary for the icon and text colors. -->
+    <style name="Widget.MaterialComponents.BottomNavigationView.CustomColored">
+        <item name="enforceTextAppearance">true</item>
+        <item name="enforceMaterialTheme">true</item>
+        <item name="android:background">@color/main_pink</item>
+        <item name="itemIconTint">@color/bottom_nav_color</item>
+        <item name="itemRippleColor">@color/black </item>
+        <item name="itemTextAppearanceInactive">?attr/textAppearanceCaption</item>
+        <item name="itemTextAppearanceActive">?attr/textAppearanceCaption</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+    </style>
 </resources>

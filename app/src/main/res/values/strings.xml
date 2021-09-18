@@ -4,11 +4,17 @@
     <string name="milestone_list_fragment_label">{age}</string>
     <string name="age_list_fragment_label">Pick an age range</string>
     <string name="activities_list_fragment_label">Activities</string>
+    <string name="children_profiles_fragment_label">Select a child to begin!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="database_version">child_development.database_version</string>
     <string name="file_key">child_development.shared_preferences</string>
     <string name="default_database_version">0</string>
     <string name="activities_button">See activities</string>
     <string name="image_description">Child in various developmental stages.</string>
+    <string name="child_profiles">Profiles</string>
+    <string name="browse_all">Browse All</string>
+    <string name="search">Search</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

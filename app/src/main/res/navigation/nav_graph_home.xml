@@ -29,4 +29,7 @@
         android:id="@+id/activitiesListFragment"
         android:name="com.example.childdevelopment.overview.ActivitiesListFragment"
         android:label="@string/activities_list_fragment_label" />
+    <fragment android:id="@+id/childrenProfilesFragment"
+        android:name="com.example.childdevelopment.overview.ChildrenProfilesFragment"
+        android:label="@string/children_profiles_fragment_label"/>
 </navigation>

@@ -18,10 +18,12 @@ class AgesAdapter(val fragment: AgesListFragment) :
     class AgesViewHolder(private var binding: AgesViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(age: AgesOption, fragment: AgesListFragment) {
-            binding.item = age
-            binding.ageFragment = fragment
-            binding.executePendingBindings()
-            binding.imageView.setImageResource(age.imageId)
+            binding.apply {
+                item = age
+                ageFragment = fragment
+                executePendingBindings()
+                imageView.setImageResource(age.imageId)
+            }
         }
     }
 
