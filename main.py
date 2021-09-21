@@ -1,10 +1,9 @@
 """
 Author: Joel Johnson
-Date: 6/5/2021
-Purpose: Final project for CS 493
-Description: This is the REST backend for a child development app which includes
-USERS, CHILDREN, and MILESTONES as entities. Provides basic REST functionality
-to access these entities with authentication provided by OAuth.
+Date: 9/19/2021
+Description: This is the REST backend for a child development 
+app which currently includes only MILESTONES as an entity. 
+Provides basic REST functionality to access milestones.
 """
 from flask import Flask, Blueprint, render_template, request, session, redirect, url_for
 from flask_mail import Mail, Message
@@ -52,6 +51,7 @@ def upload():
 	return render_template('upload.html')
 	
 # Send email 
+# https://www.twilio.com/blog/2018/03/send-email-programmatically-with-gmail-python-and-flask.html
 @app.route('/contact_us', methods=["POST"])
 def send_email():
 	requiredKeys = ["contact_name", "contact_email", "contact_message"]
@@ -59,7 +59,7 @@ def send_email():
 		if key not in request.form.keys():
 			request.form[key] = "NONE"
 		
-	returnBody = "Name: {} Email: {} Message: {}".format(
+	returnBody = "Name: {} \nEmail: {} \nMessage: {}".format(
 			request.form["contact_name"], 
 			request.form["contact_email"], 
 			request.form["contact_message"]
