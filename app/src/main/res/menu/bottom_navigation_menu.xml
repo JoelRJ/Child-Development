@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--https://github.com/android/architecture-components-samples/tree/master/NavigationAdvancedSample-->
+<!--https://developer.android.com/codelabs/android-navigation#4-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_graph_profiles"
+        android:id="@+id/profiles"
         android:enabled="true"
         android:icon="@drawable/ic_profile"
         android:title="@string/child_profiles"/>
     <item
-        android:id="@+id/nav_graph_home"
+        android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_growth"
         android:title="@string/browse_all"/>

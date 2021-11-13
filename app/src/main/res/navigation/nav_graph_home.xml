@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--https://proandroiddev.com/step-by-step-to-bottom-navigation-with-jetpacks-navigation-component-and-multiple-nav-graphs-271c05af1dd3-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -29,7 +30,9 @@
         android:id="@+id/activitiesListFragment"
         android:name="com.example.childdevelopment.overview.ActivitiesListFragment"
         android:label="@string/activities_list_fragment_label" />
-    <fragment android:id="@+id/childrenProfilesFragment"
+    <fragment
+        android:id="@+id/childrenProfilesFragment2"
         android:name="com.example.childdevelopment.overview.ChildrenProfilesFragment"
-        android:label="@string/children_profiles_fragment_label"/>
+        android:label="fragment_children_profiles"
+        tools:layout="@layout/fragment_children_profiles" />
 </navigation>

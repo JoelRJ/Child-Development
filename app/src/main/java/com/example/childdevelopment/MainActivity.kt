@@ -11,6 +11,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.ui.setupWithNavController
 import com.example.childdevelopment.database.MilestoneApplication
 import com.example.childdevelopment.overview.AgesListFragment
 import com.example.childdevelopment.overview.ChildrenProfilesFragment
@@ -32,22 +33,23 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        setupActionBarWithNavController(navController)
+        //setupActionBarWithNavController(navController)
+        binding.bottomNavigation.setupWithNavController(navController)
 
         // Set default selectedItemId to Browse All
-        binding.bottomNavigation.selectedItemId = R.id.nav_graph_home
+        binding.bottomNavigation.selectedItemId = R.id.home
 
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.nav_graph_profiles -> {
+                R.id.profiles -> {
                     Log.d("MainActivity:BottomNav", "view profile")
-                    loadFragment(ChildrenProfilesFragment())
+                    navController.navigate(R.id.childrenProfilesFragment)
                     true
                 }
-                R.id.nav_graph_home -> {
+                R.id.home -> {
                     Log.d("MainActivity:BottomNav", "browse all")
-                    val browseFragment = AgesListFragment()
-                    loadFragment(browseFragment)
+                    navController.navigate(R.id.agesListFragment)
                     true
                 }
                 R.id.search -> {
@@ -65,10 +67,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        if (fragment != null) {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment, fragment)
-            transaction.commit()
-        }
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.commit()
     }
 }
